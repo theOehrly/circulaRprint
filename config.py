@@ -32,7 +32,7 @@ config = {
 
     'MA_always_unhold': False,  # unhold immediately after movement to prevent overheating of motor coils
     'MB_always_unhold': False,  # mostly useful on zaxis as it sometimes holds position for a long time
-    'MZ_always_unhold': True,   # will cause issues with fast moving steppers as they might be turned of too soon and
+    'MZ_always_unhold': True,   # will cause issues with fast moving steppers as they might be turned off too soon and
                                 # might miss steps
 
     'rB': 100,  # arm length  (mm)
