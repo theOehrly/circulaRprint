@@ -1,0 +1,15 @@
+Ideas/improvements:
+    - Cleaner implementation of DebugOut
+        --> introduce universal interface for getting data
+
+    - maybe implement adaptive buffer sizes (based on distance in buffer?)
+
+    - implement junction acceleration in SegAP
+
+    - add timed unhold
+
+Issues:
+
+
+Monitor:
+

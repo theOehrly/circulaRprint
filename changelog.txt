@@ -1,0 +1,58 @@
+Changelog of RPrint
+###############
+
+v0.0.7:
+- added source/provider chain:
+    every class requests single PathSegments from its "provider"-class
+    PathPlanner requests GCommands from a source and creates PathSegments from that
+    serve_next() is a required function for all classes in the calculation chain
+    advantages: Not everything needs to be precalculated
+                Possibility of modular calculation chain
+- added SegmentBuffers and the ability to use simultaneous thread calculation or pre-calculation
+- removed accelerate_b_light in StepAP
+
+v0.0.6:
+- added Z axis movement
+- added always unhold option
+
+v0.0.5:
+- correction of motor direction is now done in BipolarStepperMotor class
+- huge improvments to SegmentAccelerationPlanner speed; now only takes 20%-30% of calculation time compared to v0.0.4
+- improvements to minimum step delay in BipolarStepperMotorClass; now based on Motor max speed
+- added distortion correction option in config
+- fixed bug in SegmentAccelerationPlanner that cause unnecessary deceleration and acceleration
+- code cleanup and improved naming conventions
+- fixed showgcode option in debugout
+
+v0.0.4:
+- various changes to the GCommand and PathSegment data structure
+- fixed issues with the calculation of the difference between old and new alpha values
+    (this lead to the table turning in the wrong direction)
+- added possibility to cancel print by using ctrl+c
+- added Grbl inspired acceleration control featuring overall and per axis speed and acceleration limits
+- added backlash correction
+
+v0.0.3:
+- replaced Flow data handling
+- added disclaimer for debug out
+- fixed no circle drawn if circle starts at origin
+- improved code style in PathPlanner
+- fixed calculation of gamma
+- fixed no circle drawn if circle center is the same as table center
+
+v0.0.2:
+- made linear interpolation work
+- switching PathPlanner linear calculations to vectors
+- added config file
+- added gcode parser + possibility of reading gcode from file
+- introducing Flow for data processing
+- added graphical DEBUG (only) output
+- added arc interpolation (G02/G03) !!circle segments may be 180 degrees at maximum
+
+v0.0.1:
+ ++ first test ++
+
+
+
+
+
