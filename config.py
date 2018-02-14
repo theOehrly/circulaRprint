@@ -5,6 +5,9 @@
 #
 # configuration file
 # make a backup of this file in case you do something wrong
+#
+# this is the config file for my hardware and it should give you a basic idea about how stuff works
+# you will need to modify it to suit your setup
 
 config = {
 
@@ -14,13 +17,14 @@ config = {
 
     'MA_full_step_seq': 0,  # use full step sequence instead of default half step sequence
     'MB_full_step_seq': 0,  # ~ results in more torque but half the resolution
-    'MZ_full_step_seq': 1,
+    'MZ_full_step_seq': 1,  # 1 = Full Step, 0 = Half Step
 
     'MA_dir': 1,  # change motor dir; same as switching cables around or changing pin order
     'MB_dir': 1,  # just provided for convenience reasons
     'MZ_dir': -1,  # hast to be either 1 or -1
 
-    'distortion_correction': 1,  # either 1 or -1; necessary for some combinations of motor directions (you'll notice)
+    'distortion_correction': 1,  # either 1 or -1; necessary for some combinations of motor directions
+    # (you'll notice; if straight lines ain't straight this should fix it)
 
     'MA_backlash_correction': [2, 0.003],  # extra steps to correct for backlash when changing direction
     'MB_backlash_correction': [5, 0.003],  # [number of steps, delay per step]
@@ -28,11 +32,12 @@ config = {
 
     'MA_always_unhold': False,  # unhold immediately after movement to prevent overheating of motor coils
     'MB_always_unhold': False,  # mostly useful on zaxis as it sometimes holds position for a long time
-    'MZ_always_unhold': True,
+    'MZ_always_unhold': True,   # will cause issues with fast moving steppers as they might be turned of too soon and
+                                # might miss steps
 
     'rB': 100,  # arm length  (mm)
 
-    'table_offset': 0,  # degree; changes starting position of table --> rotates everything by the angle specified
+    'table_offset': 0,  # (degree); changes starting position of table --> rotates everything by the angle specified
 
     'alpha_res': 0.0862,  # degree per step (table)
     'beta_res': 0.04182,  # degree per step (arm)
