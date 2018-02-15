@@ -47,6 +47,7 @@ showgcode = False
 
 # draw a point for every calculated xy position
 # by default it only draws lines from point to point
+# red for linear movement, green for circular movement
 showpoints = True
 
 # table radius; used to draw a circle and also necessary for scaling
