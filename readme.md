@@ -9,8 +9,13 @@ dead spot in the middle of the table that can't be reached.
 A disadvantage of this approach is the inconsistent resolution, as it gets lower the further you get away from the 
 table center (only applies to the table axis, not the arm).
 
-Here are some images that should give you a basic understanding of how the plotter works.  
-https://drive.google.com/open?id=1_3LzlJe7sTjrp4OGNJY0WJFvSQl1Wn2D 
+Here are some images that should give you a basic understanding of how the plotter works:  
+https://drive.google.com/open?id=1_3LzlJe7sTjrp4OGNJY0WJFvSQl1Wn2D  
+or watch my youtube video:  
+https://youtu.be/Dlr2wKOdKks
+
+Feel free to contact me if you've got any questions:  
+oehrly.dev@gmail.com
     
 **Hardware**  
 A Raspberry Pi is used as a controller board.  
