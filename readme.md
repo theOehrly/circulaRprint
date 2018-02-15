@@ -25,7 +25,7 @@ Of course some stepper motors (I took mine from old DVD drives and printers) and
 * Backlash correction
 
 **FYI**
-The table axis is also called Alpha or A Axis
+The table axis is also called Alpha or A Axis  
 The arm is also referred to as beta arm, Beta axis or B Axis
 
 ## Configuration
@@ -40,10 +40,10 @@ so if you enter invalid values it'll either crash or do something funny.
 MA, MB, MZ | `[1, 2, 3, 4]` | GPIO pins for alpha, beta and z-axis stepper
 M*_full_step_seq | `0` or `1` | Use full step sequence for more torque; results in half the resolution
 M*_dir | `1` or `-1` | Changes the direction of the motor; same could be achieved by changing the pin order but this is easier
-distortion_correction | `1` or `-1` | Changes whether an offset is added or subtracted during path calculation. For some combinations of motor directions this is necessary. It can't be corrected automatically as it also depends on how the motor is wired up. If a straight lines are curved you should try changing this value.
+distortion_correction | `1` or `-1` | Changes whether an offset is added or subtracted during path calculation. For some combinations of motor directions this is necessary. It can't be corrected automatically as it also depends on how the motor is wired up. If straight lines are curved you should try changing this value.
 M*_backlash_correction | `[steps, delay]` | Compensates for backlash when the motor/axis changes direction. The first number specifies how many extra steps should be taken. The second number specifies the delay per step. The delay should be approximately (1 divided by axis feed rate). A too low number might result in skipped steps. A too high number might cause non-smooth runs as this extra time is not taken into account when calculating the timing.    
 M*_always_unhold | `False` or `True` | If set to True the motor coils are turned off immediately after each movement. This prevents the coils from heating up to much while the motor is holding position. The end position may not be reached correctly though and the motor has no active holding force. Only recommended for slow moving axes that don't move often aka the z-axis. 
-rB | `length in mm` | The length of the beta arm in **millimetres** from its point of rotation to the tool tip. Should be measured as accurate as possible. If the tool is offset to the side of the arm measure from tool tip to pivot point!
+rB | `length in mm` | The length of the beta arm in **millimetres** from its point of rotation to the tool tip. Should be measured as accurate as possible. If the tool is offset to the side of the arm, measure from tool tip to pivot point!
 alpha_ /beta_res | `resolution in degree/step` | The resolution of the alpha and beta axes. Has to be given in **degree per step**! 
 feed_rate | `speed in mm/s` | The nominal speed ot the tool relative to the table
 acceleration | `acceleration in mm/s²` | Maximum acceleration of the tool relative to the table
@@ -57,10 +57,10 @@ SegAP_buffer_length | `number of segments` | How many segments should be used fo
 Default_mode | `0` or `1` | Mode 0 calculates all path and acceleration data before starting; this can easily take a minute for larger files. Mode 1 does the calculations in a separate thread while running; the higher CPU load might cause worse timing.  
 
 The acceleration planner always ensures that no speed or acceleration limit is exceeded.  
-This means in turn that no every axis is always running at the specified maximum as both at the same time are not possible.
+This means in turn that not every axis is always running at the specified maximum as that isn't possible.
 
 
-## How to run
+## How to run it
 ```python
 from rprint import Controller
 
@@ -73,7 +73,7 @@ controller.run()
 controller.move_home()
 controller.shutdown()
 ```
-This is the basic script for running the circulaRprint. It is basically the same as in run.py.  
+This is the basic script for running the circulaRprint controller. It is basically the same as in run.py.  
 `mode` and `config` (dict) can be provided optionally, else the defaults (config.py) are used.
 
 I recommend running move_home(). It should not be necessary if the gcode ends at x0 y0, but just to be sure...  
@@ -111,23 +111,32 @@ r is the radius of the circle
 * for the alpha axis use the distance of the side drawn by it's movement to the centre 
 * for the beta axis use the length of the arm as radius r
 
-When you've calculated the angle for each axis, divide it by the number of steps you set in the code. now you have the resolution in degree per step.    
+When you've calculated the angle for each axis, divide it by the number of steps you set in the code. 
+Now you have the resolution in degree per step.    
 
 #### Centering
-Getting tool/pen tip centered on the table can be quite tricky. The only thing I can recommend is to lower the pen onto the table.
+Getting the pen tip centered on the table can be quite tricky. The only thing I can recommend is to lower the pen onto the table.
 Then move the table half a rotation by hand. If you can only see a dot, everything is perfect.
 If you can see half a circle, the tip is not centered. From the orientation of the circle and the direction you turned the table in, you can conclude the direction you're off in.
-Move the position of the tip a bi and try again until no circle is drawn anymore.
+Move the position of the tip a bit and try again until no circle is drawn anymore.
 
 ## GCode
 I only tested gcode produced by the GCode-Tools extension for Inkscape, different gcode might work.
 There are a few things one should know about:
 1. The controller expects the Z-axis to be at Z=0 when starting (a pen tip would need to be touching the table)
 1. A circle segment may cover 180° of a circle at max
-1. G00 and G01 movement is done at the same speed (the speed my machine was working at was already the maximum my tiny steppers could handle. So I didn't bother to implement a difference.)
+1. G00 and G01 are treated exactly the same (the speed my machine was working at was already the maximum my tiny steppers could handle. So I didn't bother to implement a difference.)
 1. Feed rates specified in GCode are ignored
 1. The code only executes changes of the z-height if there is no x and y information given in the same line (i.e. Z would be ignored in the following command: G00 X5 Y6 Z3 )
 
+GCode should be in millimetres.
+
+It ***might*** work in inch or different units if:
+* the length of the arm is specified in inch instead mm
+* speeds are given in in inch/s instead mm/s
+* acceleration is given in inch/s² instead mm/s²
+
+If it works please contact me so I can update this.
 
 ## DebugOut Tool
 
